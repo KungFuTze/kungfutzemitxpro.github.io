@@ -1,0 +1,60 @@
+<html>
+  <script src="./rotateMatrix.js"></script>
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      grid-template-rows: repeat(3, 60px);
+      grid-gap: 10px;
+    }
+    .box {
+      background-color: #444;
+      color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      font-size: 150%;
+    }
+  </style>
+  <div class="grid">
+    <div class="box 1">1</div>
+    <div class="box 2">2</div>
+    <div class="box 3">3</div>
+    <div class="box 4">4</div>
+    <div class="box 5">5</div>
+    <div class="box 6">6</div>
+    <div class="box 7">7</div>
+    <div class="box 8">8</div>
+    <div class="box 9">9</div>
+  </div>
+  <script>
+    const mlen = 3; // matrix length
+    const tagArray = []; // handle on divs
+    let tag = document.getElementsByClassName("box");
+    let len = tag.length;
+    for (let i = 0; i < len; i++) {
+      tagArray[i] = tag.item(i); // get a handle on divs
+      console.log(tag.item(i).innerText);
+    }
+    console.log(JSON.stringify(tag));
+    function map(i, j) {
+      return 3 * j + i;
+    }
+    function toij(k) {
+      i = k % 3;
+      j = Math.floor(k / 3);
+      return { i, j };
+    }
+    function writeToGrid(A) {
+      tagArray.forEach((item, index) => {
+        let res = toij(index);
+        item.innerText = A[res.j][res.i];
+      });
+    }
+    writeToGrid(A);
+    transpose(A);
+    writeToGrid(A);
+    exchangeCols(A);
+    writeToGrid(A);
+    console.log(JSON.stringify(A));
+  </script>
+</html>
